@@ -1,7 +1,8 @@
 # Login to App server which is trouble
-
+# Check system is running
 sudo systemctl status httpd
 
+# Check port number use
 sudo netstat -tulpn | grep port_number
 
 # You can see port_number has take for another service
