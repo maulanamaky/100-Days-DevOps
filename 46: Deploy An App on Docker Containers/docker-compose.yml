@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  web_services:
+    container_name: php_apache
+    image: php:8.3.27RC1-apache-trixie  # Use php image with any apache tag.
+    ports:
+    - "3002:80"
+    volumes:
+    - /var/www/html:/var/www/html
+
+  db_services:
+    container_name: mysql_apache
+    image: mariadb:latest
+    ports:
+    - "3306:3306"
+    volumes:
+    - /var/lib/mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: database_apache
+      MYSQL_USER: custom-user
+      MYSQL_PASSWORD: custom-password
+      MYSQL_ROOT_PASSWORD: admin123
