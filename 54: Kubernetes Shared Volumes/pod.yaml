@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volume-shared-nautilus
+  labels:
+    run: volume-shared-nautilus
+spec:
+  continers:
+  - name: volume-container-nautilus-1
+    image: fedora:latest
+    command: ["sh", "-c", "sleep infinity"]
+    volumeMounts:
+    - name: volume-share
+      mountPath: /tmp/media
+  - name: volume-container-nautilus-2
+    image: fedora:latest
+    command: ["sh", "-c", "sleep infinity"]
+    volumeMounts:
+    - name: volume-share
+      mountPath: /tmp/demo
+  volumes:
+  - name: volume-share
+    emptyDir: {}
