@@ -1,4 +1,4 @@
-apiVersion:
+apiVersion: app/v1
 kind: Deployment
 metadata:
   name: grafana-deployment-xfusion
