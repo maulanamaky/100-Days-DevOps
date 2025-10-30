@@ -1,0 +1,21 @@
+apiVersion:
+kind: Deployment
+metadata:
+  name: grafana-deployment-xfusion
+  labels:
+    app: grafana-deployment-xfusion
+spec:
+  replicas: 2
+  selector:
+    matchlabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+      - name: grafana
+        image: grafana/grafana:nightly
+        ports:
+          - containerPort: 3000
