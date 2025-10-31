@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-datacenter
+  labels:
+    run: web-datacenter
+spec:
+  selector:
+    run: pod-datacenter
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30008
+  type: NodePort
