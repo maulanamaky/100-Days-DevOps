@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: iron-db-service-datacenter
+  name: iron-db-service-datacenter
+  namespace: iron-namespace-datacenter
+spec:
+  ports:
+  - port: 3306
+    protocol: TCP
+    targetPort: 3306
+  selector:
+    db: mariadb
+  type: ClusterIP
