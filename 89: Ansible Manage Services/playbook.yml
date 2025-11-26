@@ -1,0 +1,28 @@
+---
+- name: install and configure
+  hosts: all
+  become: yes
+  tasks:
+  - name: Install
+    yum:
+      name: httpd
+      state: present
+  - name: configure service
+    systemd_service:
+      name: httpd
+      state: started
+      enabled: true
+  - name: blockinfile
+    blockinfile:
+      path: /var/www/html/index.html
+      create: true
+      block: |
+        Welcome to XfusionCorp!
+        This is Nautilus sample file, created using Ansible!
+        Please do not modify this file manually!
+  - name: change owner
+    file:
+      path: /var/www/html/index.html
+      owner: apache
+      group: apache
+      mode: '0755'
