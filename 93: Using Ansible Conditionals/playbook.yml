@@ -1,0 +1,26 @@
+---
+- name: test
+  hosts: all
+  become: yes
+  tasks:
+  - copy:
+      src: /usr/src/itadmin/blog.txt
+      dest: /opt/itadmin
+      owner: tony
+      group: tony
+      mode: "0744"
+    when: ansible_hostname == 'stapp01'
+  - copy:
+      src: /usr/src/itadmin/story.txt
+      dest: /opt/itadmin
+      owner: steve
+      group: steve
+      mode: "0744"
+    when: ansible_hostname == 'stapp02'
+  - copy:
+      src: /usr/src/itadmin/media.txt
+      dest: /opt/itadmin
+      owner: banner
+      group: banner
+      mode: "0744"
+    when: ansible_hostname == 'stapp03'
