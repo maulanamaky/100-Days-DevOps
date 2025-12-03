@@ -1,0 +1,48 @@
+---
+- name: ACL
+  hosts: all
+  become: yes
+
+  tasks:
+  - file:
+      path: /opt/finance/blog.txt
+      state: touch
+      owner: root
+      group: root
+      mode: '0644'
+    when: ansible_hostname == 'stapp01'
+  - acl:
+      path: /opt/finance/blog.txt
+      entity: tony
+      etype: group
+      state: present
+      permissions: r
+    when: ansible_hostname == 'stapp01'
+  - file:
+      path: /opt/finance/story.txt
+      state: touch
+      owner: root
+      group: root
+      mode: '0644'
+    when: ansible_hostname == 'stapp02'
+  - acl:
+      path: /opt/finance/story.txt
+      entity: steve
+      etype: user
+      state: present
+      permissions: rw
+    when: ansible_hostname == 'stapp02'
+  - file:
+      path: /opt/finance/media.txt
+      state: touch
+      owner: root
+      group: root
+      mode: '0644'
+    when: ansible_hostname == 'stapp03'
+  - acl:
+      path: /opt/finance/media.txt
+      entity: banner
+      etype: group
+      state: present
+      permissions: rw
+    when: ansible_hostname == 'stapp03'
